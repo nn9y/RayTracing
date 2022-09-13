@@ -8,4 +8,4 @@
 
 The Final Render:
 
-![Final scene](./in1weekend/images/image21.ppm)
+![Final scene](./in1weekend/images/image21.png)
