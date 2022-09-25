@@ -1,19 +1,29 @@
-CC=g++
-CFLAGS=-Wall -std=c++11
+BUILD_DIR := build
+SRC_DIRS := src
 
-BUILD=./build
-TARGET=$(BUILD)/in1weekend
-SRC=./src
-SRCS=$(SRC)/*.cpp
-INC=-I./include
-OBJS=$(SRCS:.cpp=.o)
+TARGET := $(BUILD_DIR)/in1weekend 
+
+SRCS := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
+
+OBJS := $(SRCS:%=%.o)
+
+INC_DIRS := -I./include
+
+CPPFLAGS := $(INC_FLAGS) -Wall
+CFLAGS := $(INC_FLAGS) -Wall
+
 
 $(TARGET): $(OBJS)
-	$(CC) -o $@ $^
+	$(CXX) $(OBJS) -o $@
 	rm -rf $^
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+%.c.o: %.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
+%.cpp.o: %.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+
+.PHONY: clean
 clean:
-	rm -rf $(TARGET) $(OBJS)
+	rm -rf $(TARGET)
