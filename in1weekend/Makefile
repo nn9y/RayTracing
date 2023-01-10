@@ -7,7 +7,7 @@ SRCS := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
 
 OBJS := $(SRCS:%=%.o)
 
-INC_DIRS := -I./include
+INC_FLAGS := -I./include
 
 CPPFLAGS := $(INC_FLAGS) -Wall
 CFLAGS := $(INC_FLAGS) -Wall
